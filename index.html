@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>しゃべるネコジェネレーター</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff8f0;
+    text-align: center;
+    padding: 30px;
+    color: #333;
+  }
+  h1 { color: #ff6f61; }
+  input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #ffb74d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  button:hover { background-color: #ffa726; }
+  img {
+    margin-top: 20px;
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 1rem auto;
+    width: 500px;
+  }
+</style>
+</head>
+<body>
+  <h1>😺 しゃべるネコジェネレーター</h1>
+  <p>ネコにしゃべらせたいセリフを日本語で入力してね！</p>
+  <input type="text" id="catText" placeholder="例：おはよう！" />
+  <br />
+  <button id="generateBtn">画像を生成 ▶︎</button>
+
+  <div>
+    <img id="catImage" src="" alt="ネコ画像" style="display:none;" />
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const btn = document.getElementById('generateBtn');
+    const input = document.getElementById('catText');
+    const img = document.getElementById('catImage');
+
+    btn.addEventListener('click', () => {
+      const text = input.value.trim();
+      if (!text) {
+        alert('テキストを入力してください！');
+        return;
+      }
+
+      // MyMemory翻訳APIのURLを作成
+      const url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=ja|en';
+
+      axios
+        .get(url)
+        .then(function (response) {
+          console.log(response);
+          const translated = response.data.responseData.translatedText;
+          if (!translated) {
+            alert('翻訳に失敗しました。');
+            return;
+          }
+
+          const encodedText = encodeURIComponent(translated);
+          const catUrl = `https://cataas.com/cat/says/${encodedText}?size=30&color=blue`;
+
+          img.src = catUrl;
+          img.style.display = 'block';
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert('エラーが発生しました。コンソールを確認してください。');
+        })
+        .finally(function () {
+          console.log("done!");
+        });
+    });
+  </script>
+</body>
+</html>
