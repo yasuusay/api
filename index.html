@@ -21,6 +21,7 @@
     border-radius: 8px;
     border: 1px solid #ccc;
     margin-bottom: 10px;
+    margin-top: 10px;
   }
   button {
     padding: 10px 20px;
@@ -43,11 +44,20 @@
 </style>
 </head>
 <body>
-  <h1>😺 しゃべるネコジェネレーター</h1>
-  <p>ネコにしゃべらせたいセリフを日本語で入力してね！</p>
+  <h1>しゃべるネコジェネレーター</h1>
+  <p>ネコにしゃべらせたいセリフを日本語で入力してね！（英語に変換されます）</p>
+  <button id="randomBtn">おまかせ入力</button>
+  <br>
   <input type="text" id="catText" placeholder="例：おはよう！" />
-  <br />
+  <br>
   <button id="generateBtn">画像を生成 ▶︎</button>
+
+  <div style="margin-top: 20px;">
+  <p>画像をSNSでシェアしよう！</p>
+  <button id="twitterBtn">Twitterでシェア</button>
+  <button id="facebookBtn">Facebookでシェア</button>
+  <button id="lineBtn">LINEでシェア</button>
+  </div>
 
   <div>
     <img id="catImage" src="" alt="ネコ画像" style="display:none;" />
@@ -58,6 +68,10 @@
     const btn = document.getElementById('generateBtn');
     const input = document.getElementById('catText');
     const img = document.getElementById('catImage');
+    const twitterBtn = document.getElementById('twitterBtn');
+    const facebookBtn = document.getElementById('facebookBtn');
+    const lineBtn = document.getElementById('lineBtn');
+    const randomBtn = document.getElementById('randomBtn');
 
     btn.addEventListener('click', () => {
       const text = input.value.trim();
@@ -93,6 +107,41 @@
           console.log("done!");
         });
     });
+
+    twitterBtn.addEventListener('click', () => {
+      const text = encodeURIComponent("しゃべるネコができたよ！😺");
+      const url = encodeURIComponent(img.src); // 画像URLをそのまま使う
+      window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+    });
+
+    facebookBtn.addEventListener('click', () => {
+      const url = encodeURIComponent(img.src);
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    });
+
+    lineBtn.addEventListener('click', () => {
+      const url = encodeURIComponent(img.src);
+      window.open(`https://social-plugins.line.me/lineit/share?url=${url}`, '_blank');
+    });
+
+    // お任せセリフの候補
+    const samplePhrases = [
+      "おはようニャ！",
+      "ごはんまだ？",
+      "今日もがんばってニャ！",
+      "お昼寝の時間だニャ〜",
+      "働きたくないニャ…",
+      "にゃんとかなるさ！",
+      "遊んでニャ！",
+      "世界征服するニャ！"
+    ];
+
+    // ランダムセリフ挿入ボタン処理
+    randomBtn.addEventListener("click", () => {
+      const random = samplePhrases[Math.floor(Math.random() * samplePhrases.length)];
+      input.value = random;
+    });
+
   </script>
 </body>
 </html>
