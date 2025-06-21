@@ -32,6 +32,52 @@
     font-size: 16px;
     cursor: pointer;
   }
+
+  .x_btn{
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #000000; /* Xボタンの色 */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .x_btn:hover {
+    background-color: #333333; /* ホバー時の色 */
+  }
+
+  .facebook_btn{
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #3b5998; /* Facebookボタンの色 */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .facebook_btn:hover {
+    background-color: #4267b2; /* ホバー時の色 */
+  }
+  
+  .line_btn{
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #00c300; /* LINEボタンの色 */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .line_btn:hover {
+    background-color: #00b300; /* ホバー時の色 */
+  }
+
   button:hover { background-color: #ffa726; }
   img {
     margin-top: 20px;
@@ -54,9 +100,9 @@
 
   <div style="margin-top: 20px;">
   <p>画像をSNSでシェアしよう！</p>
-  <button id="twitterBtn">Twitterでシェア</button>
-  <button id="facebookBtn">Facebookでシェア</button>
-  <button id="lineBtn">LINEでシェア</button>
+  <button id="twitterBtn" class="x_btn">Xでシェア</button>
+  <button id="facebookBtn" class="facebook_btn">Facebookでシェア</button>
+  <button id="lineBtn" class="line_btn">LINEでシェア</button>
   </div>
 
   <div>
@@ -131,7 +177,7 @@
       "今日もがんばってニャ！",
       "お昼寝の時間だニャ〜",
       "働きたくないニャ…",
-      "にゃんとかなるさ！",
+      "なんとかなるさ！",
       "遊んでニャ！",
       "世界征服するニャ！"
     ];
